@@ -2,6 +2,8 @@ package strtypes
 
 import "testing"
 
+const sampleUUID = "123e4567-e89b-12d3-a456-426614174000"
+
 func TestUUID(t *testing.T) {
 	uid := NewUUID()
 	if !uid.Valid() {
@@ -10,8 +12,7 @@ func TestUUID(t *testing.T) {
 }
 
 func TestUUID_Valid(t *testing.T) {
-	s := "123e4567-e89b-12d3-a456-426614174000"
-	uid := UUID(s)
+	uid := UUID(sampleUUID)
 	if !uid.Valid() {
 		t.Errorf("expected valid UUID, got invalid")
 	}
@@ -35,8 +36,7 @@ func TestNewUUIDPointer(t *testing.T) {
 }
 
 func TestUUID_Value(t *testing.T) {
-	s := "123e4567-e89b-12d3-a456-426614174000"
-	uid := UUID(s)
+	uid := UUID(sampleUUID)
 
 	v, err := uid.Value()
 	if err != nil {
@@ -47,29 +47,26 @@ func TestUUID_Value(t *testing.T) {
 		t.Errorf("expected string, got %T", v)
 	}
 
-	if v.(string) != s {
-		t.Errorf("expected %s, got %s", s, v)
+	if v.(string) != sampleUUID {
+		t.Errorf("expected %s, got %s", sampleUUID, v)
 	}
 }
 
 func TestUUID_Scan(t *testing.T) {
 	var uid UUID
 
-	s := "123e4567-e89b-12d3-a456-426614174000"
-	err := uid.Scan(s)
+	err := uid.Scan(sampleUUID)
 	if err != nil {
 		t.Errorf("expected nil error, got %s", err)
 	}
 
-	if uid.String() != s {
-		t.Errorf("expected %s, got %s", s, uid.String())
+	if uid.String() != sampleUUID {
+		t.Errorf("expected %s, got %s", sampleUUID, uid.String())
 	}
 }
 
 func TestUUID_JSON(t *testing.T) {
-	s := "123e4567-e89b-12d3-a456-426614174000"
-
-	uid := UUID(s)
+	uid := UUID(sampleUUID)
 	b, err := uid.MarshalJSON()
 	if err != nil {
 		t.Errorf("expected nil error, got %s", err)
