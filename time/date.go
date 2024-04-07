@@ -21,6 +21,23 @@ func (u Date) Valid() bool {
 	return err == nil
 }
 
+func (u Date) BuiltIn() time.Time {
+	t, _ := time.Parse(dateFormat, string(u))
+	return t
+}
+
+func (u Date) Day() int {
+	return u.BuiltIn().Day()
+}
+
+func (u Date) Month() time.Month {
+	return u.BuiltIn().Month()
+}
+
+func (u Date) Year() int {
+	return u.BuiltIn().Year()
+}
+
 /////// Constructors ///////
 
 func Today() Date {
