@@ -51,6 +51,10 @@ func DateFromBuiltIn(t time.Time) Date {
 /////// SQL ///////
 
 func (u Date) Value() (driver.Value, error) {
+	if u == "" {
+		return nil, nil
+	}
+
 	if !u.Valid() {
 		return nil, strtypes.ErrInvalid
 	}

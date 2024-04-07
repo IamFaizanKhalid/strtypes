@@ -33,6 +33,10 @@ func NewPointer() *UUID {
 /////// SQL ///////
 
 func (u UUID) Value() (driver.Value, error) {
+	if u == "" {
+		return nil, nil
+	}
+
 	if !u.Valid() {
 		return nil, strtypes.ErrInvalid
 	}
