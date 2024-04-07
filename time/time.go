@@ -79,14 +79,10 @@ func TimeFromBuiltIn(t time.Time) Time {
 /////// SQL ///////
 
 func (u Time) Value() (driver.Value, error) {
-	if u == "" {
+	if !u.Valid() {
 		return nil, nil
 	}
-
-	if !u.Valid() {
-		return nil, strtypes.ErrInvalid
-	}
-	return string(u), nil
+	return u.BuiltIn(), nil
 }
 
 func (u *Time) Scan(value interface{}) error {
