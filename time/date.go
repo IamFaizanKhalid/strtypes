@@ -44,9 +44,8 @@ func Today() Date {
 	return Date(time.Now().Format(dateFormat))
 }
 
-func TodayPointer() *Date {
-	tm := Date(time.Now().Format(dateFormat))
-	return &tm
+func DateFromBuiltIn(t time.Time) Date {
+	return Date(t.Format(dateFormat))
 }
 
 /////// SQL ///////

@@ -72,9 +72,8 @@ func Now() Time {
 	return Time(time.Now().Format(timeFormat))
 }
 
-func NowPointer() *Time {
-	tm := Time(time.Now().Format(timeFormat))
-	return &tm
+func TimeFromBuiltIn(t time.Time) Time {
+	return Time(t.Format(timeFormat))
 }
 
 /////// SQL ///////
