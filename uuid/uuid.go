@@ -1,8 +1,9 @@
-package strtypes
+package uuid
 
 import (
 	"database/sql/driver"
 	"fmt"
+	"github.com/IamFaizanKhalid/strtypes"
 	"github.com/google/uuid"
 	"strings"
 )
@@ -33,7 +34,7 @@ func NewUUIDPointer() *UUID {
 
 func (u UUID) Value() (driver.Value, error) {
 	if !u.Valid() {
-		return nil, ErrInvalid
+		return nil, strtypes.ErrInvalid
 	}
 	return string(u), nil
 }
@@ -44,12 +45,12 @@ func (u *UUID) Scan(value interface{}) error {
 	}
 	s, ok := value.(string)
 	if !ok {
-		return InvalidTypeErr("UUID", s)
+		return strtypes.InvalidTypeErr("UUID", s)
 	}
 
 	uid := UUID(s)
 	if !uid.Valid() {
-		return ErrInvalid
+		return strtypes.ErrInvalid
 	}
 
 	*u = uid
@@ -61,7 +62,7 @@ func (u *UUID) Scan(value interface{}) error {
 
 func (u UUID) MarshalJSON() ([]byte, error) {
 	if !u.Valid() {
-		return nil, ErrInvalid
+		return nil, strtypes.ErrInvalid
 	}
 	return []byte(fmt.Sprintf("\"%s\"", u)), nil
 }
@@ -71,7 +72,7 @@ func (u *UUID) UnmarshalJSON(data []byte) error {
 
 	uid := UUID(s)
 	if !uid.Valid() {
-		return ErrInvalid
+		return strtypes.ErrInvalid
 	}
 
 	*u = uid

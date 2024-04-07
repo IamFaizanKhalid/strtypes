@@ -1,8 +1,9 @@
-package strtypes
+package time
 
 import (
 	"database/sql/driver"
 	"fmt"
+	"github.com/IamFaizanKhalid/strtypes"
 	"strings"
 	"time"
 )
@@ -33,7 +34,7 @@ func NewTimePointer() *Time {
 
 func (u Time) Value() (driver.Value, error) {
 	if !u.Valid() {
-		return nil, ErrInvalid
+		return nil, strtypes.ErrInvalid
 	}
 	return string(u), nil
 }
@@ -44,12 +45,12 @@ func (u *Time) Scan(value interface{}) error {
 	}
 	s, ok := value.(string)
 	if !ok {
-		return InvalidTypeErr("Time", s)
+		return strtypes.InvalidTypeErr("Time", s)
 	}
 
 	tm := Time(s)
 	if !tm.Valid() {
-		return ErrInvalid
+		return strtypes.ErrInvalid
 	}
 
 	*u = tm
@@ -61,7 +62,7 @@ func (u *Time) Scan(value interface{}) error {
 
 func (u Time) MarshalJSON() ([]byte, error) {
 	if !u.Valid() {
-		return nil, ErrInvalid
+		return nil, strtypes.ErrInvalid
 	}
 	return []byte(fmt.Sprintf("\"%s\"", u)), nil
 }
@@ -71,7 +72,7 @@ func (u *Time) UnmarshalJSON(data []byte) error {
 
 	tm := Time(s)
 	if !tm.Valid() {
-		return ErrInvalid
+		return strtypes.ErrInvalid
 	}
 
 	*u = tm

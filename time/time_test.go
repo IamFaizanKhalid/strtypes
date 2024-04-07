@@ -1,4 +1,4 @@
-package strtypes
+package time
 
 import "testing"
 
