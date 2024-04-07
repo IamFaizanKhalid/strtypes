@@ -82,7 +82,7 @@ func (u Time) Value() (driver.Value, error) {
 	if !u.Valid() {
 		return nil, strtypes.ErrInvalid
 	}
-	return u.BuiltIn(), nil
+	return string(u), nil
 }
 
 func (u *Time) Scan(value interface{}) error {

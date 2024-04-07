@@ -54,7 +54,7 @@ func (u Date) Value() (driver.Value, error) {
 	if !u.Valid() {
 		return nil, strtypes.ErrInvalid
 	}
-	return u.BuiltIn(), nil
+	return string(u), nil
 }
 
 func (u *Date) Scan(value interface{}) error {
