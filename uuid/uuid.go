@@ -36,7 +36,7 @@ func (u UUID) Value() (driver.Value, error) {
 	if !u.Valid() {
 		return nil, strtypes.ErrInvalid
 	}
-	return string(u), nil
+	return []uint8(u), nil
 }
 
 func (u *UUID) Scan(value interface{}) error {

@@ -54,19 +54,19 @@ func (u Date) Value() (driver.Value, error) {
 	if !u.Valid() {
 		return nil, strtypes.ErrInvalid
 	}
-	return string(u), nil
+	return u.BuiltIn(), nil
 }
 
 func (u *Date) Scan(value interface{}) error {
 	if value == nil {
 		return nil
 	}
-	s, ok := value.(string)
+	s, ok := value.(time.Time)
 	if !ok {
 		return strtypes.InvalidTypeErr("Date", s)
 	}
 
-	tm := Date(s)
+	tm := DateFromBuiltIn(s)
 	if !tm.Valid() {
 		return strtypes.ErrInvalid
 	}
