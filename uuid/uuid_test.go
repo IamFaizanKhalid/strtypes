@@ -5,7 +5,7 @@ import "testing"
 const sampleUUID = "123e4567-e89b-12d3-a456-426614174000"
 
 func TestUUID(t *testing.T) {
-	uid := NewUUID()
+	uid := New()
 	if !uid.Valid() {
 		t.Errorf("expected valid UUID, got invalid")
 	}
@@ -19,14 +19,14 @@ func TestUUID_Valid(t *testing.T) {
 }
 
 func TestNewUUID(t *testing.T) {
-	uid := NewUUID()
+	uid := New()
 	if !uid.Valid() {
 		t.Errorf("expected valid UUID, got invalid")
 	}
 }
 
 func TestNewUUIDPointer(t *testing.T) {
-	uid := NewUUIDPointer()
+	uid := NewPointer()
 	if uid == nil {
 		t.Errorf("expected non-nil UUID pointer, got nil")
 	}

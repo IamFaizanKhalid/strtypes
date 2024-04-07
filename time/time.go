@@ -10,23 +10,70 @@ import (
 
 type Time string
 
+const timeFormat = time.RFC3339
+
 func (u Time) String() string {
 	return string(u)
 }
 
 func (u Time) Valid() bool {
-	_, err := time.Parse(time.RFC3339, string(u))
+	_, err := time.Parse(timeFormat, string(u))
 	return err == nil
+}
+
+func (u Time) BuiltIn() time.Time {
+	t, _ := time.Parse(timeFormat, string(u))
+	return t
+}
+
+func (u Time) Date() Date {
+	return Date(u.BuiltIn().Format(dateFormat))
+}
+
+func (u Time) Year() int {
+	return u.BuiltIn().Year()
+}
+
+func (u Time) Month() time.Month {
+	return u.BuiltIn().Month()
+}
+
+func (u Time) Day() int {
+	return u.BuiltIn().Day()
+}
+
+func (u Time) Weekday() time.Weekday {
+	return u.BuiltIn().Weekday()
+}
+
+func (u Time) Hour() int {
+	return u.BuiltIn().Hour()
+}
+
+func (u Time) Minute() int {
+	return u.BuiltIn().Minute()
+}
+
+func (u Time) Second() int {
+	return u.BuiltIn().Second()
+}
+
+func (u Time) Nanosecond() int {
+	return u.BuiltIn().Nanosecond()
+}
+
+func (u Time) YearDay() int {
+	return u.BuiltIn().YearDay()
 }
 
 /////// Constructors ///////
 
-func NewTime() Time {
-	return Time(time.Now().Format(time.RFC3339))
+func Now() Time {
+	return Time(time.Now().Format(timeFormat))
 }
 
-func NewTimePointer() *Time {
-	tm := Time(time.Now().Format(time.RFC3339))
+func NowPointer() *Time {
+	tm := Time(time.Now().Format(timeFormat))
 	return &tm
 }
 

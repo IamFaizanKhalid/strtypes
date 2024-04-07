@@ -21,11 +21,11 @@ func (u UUID) Valid() bool {
 
 /////// Constructors ///////
 
-func NewUUID() UUID {
+func New() UUID {
 	return UUID(uuid.New().String())
 }
 
-func NewUUIDPointer() *UUID {
+func NewPointer() *UUID {
 	uid := UUID(uuid.New().String())
 	return &uid
 }

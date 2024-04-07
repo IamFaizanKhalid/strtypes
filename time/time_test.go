@@ -5,9 +5,16 @@ import "testing"
 const sampleTime = "2024-04-07T10:35:00Z"
 
 func TestTime(t *testing.T) {
-	uid := NewTime()
+	uid := Now()
 	if !uid.Valid() {
 		t.Errorf("expected valid Time, got invalid")
+	}
+}
+
+func TestTime_String(t *testing.T) {
+	uid := Time(sampleTime)
+	if uid.String() != sampleTime {
+		t.Errorf("expected %s, got %s", sampleTime, uid.String())
 	}
 }
 
@@ -18,15 +25,15 @@ func TestTime_Valid(t *testing.T) {
 	}
 }
 
-func TestNewTime(t *testing.T) {
-	uid := NewTime()
+func TestNow(t *testing.T) {
+	uid := Now()
 	if !uid.Valid() {
 		t.Errorf("expected valid Time, got invalid")
 	}
 }
 
-func TestNewTimePointer(t *testing.T) {
-	uid := NewTimePointer()
+func TestNowPointer(t *testing.T) {
+	uid := NowPointer()
 	if uid == nil {
 		t.Errorf("expected non-nil Time pointer, got nil")
 	}
