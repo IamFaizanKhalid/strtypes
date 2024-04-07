@@ -45,7 +45,7 @@ func (u *UUID) Scan(value interface{}) error {
 	}
 	s, ok := value.(string)
 	if !ok {
-		return strtypes.InvalidTypeErr("UUID", s)
+		return strtypes.InvalidTypeErr("UUID", value)
 	}
 
 	uid := UUID(s)

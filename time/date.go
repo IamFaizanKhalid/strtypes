@@ -63,7 +63,7 @@ func (u *Date) Scan(value interface{}) error {
 	}
 	s, ok := value.(string)
 	if !ok {
-		return strtypes.InvalidTypeErr("Date", s)
+		return strtypes.InvalidTypeErr("Date", value)
 	}
 
 	tm := Date(s)

@@ -91,7 +91,7 @@ func (u *Time) Scan(value interface{}) error {
 	}
 	s, ok := value.(string)
 	if !ok {
-		return strtypes.InvalidTypeErr("Time", s)
+		return strtypes.InvalidTypeErr("Time", value)
 	}
 
 	tm := Time(s)
