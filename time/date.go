@@ -61,7 +61,7 @@ func (u *Date) Scan(value interface{}) error {
 	if value == nil {
 		return nil
 	}
-	s, ok := value.(string)
+	s, ok := value.([]uint8)
 	if !ok {
 		return strtypes.InvalidTypeErr("Date", value)
 	}
